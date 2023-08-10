@@ -150,8 +150,8 @@ static struct timer_list mytimer;
 static int myperiod=30;
 
 static struct backlight_device *bd;
-static uint32_t miyoo_ver=1;
-static uint32_t miyoo_layout=1;
+static uint32_t miyoo_ver=3;
+static uint32_t miyoo_layout=4;
 static unsigned long hotkey=0;
 static unsigned long lockkey=0;
 static uint8_t *gpio;
@@ -969,7 +969,7 @@ static long myioctl(struct file *filp, unsigned int cmd, unsigned long arg)
     printk("miyoo hotkey custom is =%d\n", (bool)hotkey_custom);
     break;
   case MIYOO_KBD_SET_VER:
-    miyoo_ver = arg;
+    // miyoo_ver = arg;
 #if defined(DEBUG)
     printk("miyoo keypad version config as v%d\n", (int)miyoo_ver);
 #endif
