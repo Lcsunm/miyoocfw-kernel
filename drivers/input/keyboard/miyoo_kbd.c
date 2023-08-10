@@ -380,125 +380,68 @@ static void scan_handler(unsigned long unused)
           }
           break;
       case 3:
-          // gpio_direction_input(IN_4);
-          // gpio_direction_input(IN_A_M3);
-          // gpio_direction_input(IN_PA1);
-          // gpio_direction_output(IN_3,1);
-          // if(gpio_get_value(IN_1) == 1){
-          //     val|= MY_UP;
-          // }
-          // if(gpio_get_value(IN_2) == 1){
-          //     val|= MY_LEFT;
-          // }
-          // if(gpio_get_value(IN_A_M3) == 1){
-          //     val|= MY_TB;
-          // }
-          // if(gpio_get_value(IN_PA1) == 1){
-          //     val|= MY_B;
-          // }
-
-          // gpio_direction_input(IN_3);
-          // gpio_direction_output(IN_4,1);
-          // if(gpio_get_value(IN_1) == 1){
-          //     val|= MY_DOWN;
-          // }
-          // if(gpio_get_value(IN_2) == 1){
-          //     val|= MY_RIGHT;
-          // }
-          // if(gpio_get_value(IN_A_M3) == 1){
-          //     val|= MY_A;
-          // }
-          // if(gpio_get_value(IN_PA1) == 1){
-          //     val|= MY_TA;
-          // }
-
-          // gpio_direction_input(IN_4);
-          // gpio_direction_output(OUT_2,1);
-          // gpio_direction_output(OUT_3,1);
-          // if(gpio_get_value(IN_PA1) == 1){
-          //     val|= MY_R;
-          // }
-          // if(gpio_get_value(IN_A_M3) == 1){
-          //     val|= MY_SELECT;
-          // }
-          // if(gpio_get_value(IN_2) == 1){
-          //     val|= MY_L1;
-          // }
-          // if(gpio_get_value(IN_1) == 1 && gpio_get_value(IN_2) == 0){
-          //     val|= MY_START;
-          // }
-
-
-          // gpio_direction_output(OUT_2, 0);
-          // gpio_direction_output(OUT_3, 0);
-          // gpio_direction_output(IN_4,1);
-          // // gpio_direction_output(IN_A_M3,1);
-          // // gpio_direction_input(IN_R2_M3);
-          // // if(gpio_get_value(IN_R2_M3) == 1){
-          // //     val|= MY_R1;
-          // // }
-          
-          gpio_direction_input(((32 * 4) + 0));
-          gpio_direction_input(((32 * 4) + 1));
-          gpio_direction_input(((32 * 4) + 2));
-          gpio_direction_input(((32 * 4) + 3));
-          gpio_direction_input(((32 * 4) + 4));
-          gpio_direction_input(((32 * 4) + 5));
-          gpio_direction_input(((32 * 4) + 6));
-          gpio_direction_input(((32 * 4) + 7));
-          gpio_direction_input(((32 * 4) + 8));
-          gpio_direction_input(((32 * 4) + 9));
-          gpio_direction_input(((32 * 4) + 10));
-          gpio_direction_input(((32 * 4) + 11));
-          gpio_direction_input(((32 * 4) + 12));
-          gpio_direction_input(((32 * 4) + 13));
-          gpio_direction_input(((32 * 4) + 14));
-          
-          if(gpio_get_value(((32 * 4) + 0)) == 0){
+          gpio_direction_input(IN_4);
+          gpio_direction_input(IN_A_M3);
+          gpio_direction_input(IN_PA1);
+          gpio_direction_output(IN_3,1);
+          if(gpio_get_value(IN_1) == 1){
               val|= MY_UP;
           }
-          if(gpio_get_value(((32 * 4) + 1)) == 0){
-              val|= MY_DOWN;
-          }
-          if(gpio_get_value(((32 * 4) + 2)) == 0){
+          if(gpio_get_value(IN_2) == 1){
               val|= MY_LEFT;
           }
-          if(gpio_get_value(((32 * 4) + 3)) == 0){
-              val|= MY_RIGHT;
-          }
-          if(gpio_get_value(((32 * 4) + 4)) == 0){
+          if(gpio_get_value(IN_A_M3) == 1){
+              // val|= MY_TB;
               val|= MY_A;
           }
-          if(gpio_get_value(((32 * 4) + 5)) == 0){
-              val|= MY_B;
-          }
-          if(gpio_get_value(((32 * 4) + 6)) == 0){
-              val|= MY_TA;
-          }
-          if(gpio_get_value(((32 * 4) + 7)) == 0){
-              val|= MY_TB;
-          }
-          if(gpio_get_value(((32 * 4) + 8)) == 0){
-              val|= MY_SELECT;
-          }
-          if(gpio_get_value(((32 * 4) + 9)) == 0){
-              val|= MY_START;
-          }
-          if(gpio_get_value(((32 * 4) + 10)) == 0){
-              val|= MY_L1;
-          }
-          if(gpio_get_value(((32 * 4) + 11)) == 0){
+          if(gpio_get_value(IN_PA1) == 1){
+              // val|= MY_B;
               val|= MY_R1;
           }
-          if(gpio_get_value(((32 * 4) + 12)) == 0){
-              val|= MY_L2;
+
+          gpio_direction_input(IN_3);
+          gpio_direction_output(IN_4,1);
+          if(gpio_get_value(IN_1) == 1){
+              val|= MY_DOWN;
           }
-          if(gpio_get_value(((32 * 4) + 13)) == 0){
-              val|= MY_R2;
+          if(gpio_get_value(IN_2) == 1){
+              val|= MY_RIGHT;
           }
-          if(gpio_get_value(((32 * 4) + 14)) == 0){
+          if(gpio_get_value(IN_A_M3) == 1){
+              // val|= MY_A;
+              val|= MY_L1;
+          }
+          if(gpio_get_value(IN_PA1) == 1){
+              // val|= MY_TA;
+              val|= MY_TB;
+          }
+
+          gpio_direction_input(IN_4);
+          gpio_direction_output(OUT_2,1);
+          gpio_direction_output(OUT_3,1);
+          if(gpio_get_value(IN_PA1) == 1){
               val|= MY_R;
           }
+          if(gpio_get_value(IN_A_M3) == 1){
+              val|= MY_SELECT;
+          }
+          if(gpio_get_value(IN_2) == 1){
+              // val|= MY_L1;
+              val|= MY_B;
+          }
+          if(gpio_get_value(IN_1) == 1 && gpio_get_value(IN_2) == 0){
+              val|= MY_START;
+          }
+
+
+          gpio_direction_output(OUT_2, 0);
+          gpio_direction_output(OUT_3, 0);
+          gpio_direction_output(IN_4,1);
+          // gpio_direction_output(IN_A_M3,1);
+          // gpio_direction_input(IN_R2_M3);
+          // if(gpio_get_value(IN_R2_M3) == 1){
+          //     val|= MY_R1;
+          // }
 
           break;
       case 4:
@@ -678,6 +621,12 @@ static void scan_handler(unsigned long unused)
     //   val|= MY_L3;
     //   hotkey_actioned = true;
     // }
+    if((val & MY_TB) && (val & MY_R1)) {
+      val&= ~MY_TB;
+      val&= ~MY_R1;
+      val|= MY_TA;
+      hotkey_actioned = true;
+    }
   } else if(miyoo_ver == 4) {
     if((val & MY_R) && (val & MY_A)) {
       if(!hotkey_down && !hotkey_custom) {
