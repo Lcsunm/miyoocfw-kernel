@@ -432,7 +432,7 @@ static void scan_handler(unsigned long unused)
           gpio_direction_output(OUT_2, 0);
           gpio_direction_output(OUT_3, 0);
           gpio_direction_output(IN_4,1);
-          gpio_direction_output(IN_A_M3,1);
+          // gpio_direction_output(IN_A_M3,1);
           gpio_direction_input(IN_R2_M3);
           if(gpio_get_value(IN_R2_M3) == 1){
               val|= MY_R1;
@@ -591,30 +591,30 @@ static void scan_handler(unsigned long unused)
       hotkey_actioned = true;
     }
   } else if(miyoo_ver == 3) {
-    if((val & MY_R) && (val & MY_L1)) {
-      val&= ~MY_R;
-      val&= ~MY_L1;
-      val|= MY_L2;
-      hotkey_actioned = true;
-    }
-    if((val & MY_R) && (val & MY_R1)) {
-      val&= ~MY_R;
-      val&= ~MY_R1;
-      val|= MY_R2;
-      hotkey_actioned = true;
-    }
-    if((val & MY_R) && (val & MY_TB)) {
-      val&= ~MY_R;
-      val&= ~MY_TB;
-      val|= MY_R3;
-      hotkey_actioned = true;
-    }
-    if((val & MY_R) && (val & MY_B)) {
-      val&= ~MY_R;
-      val&= ~MY_B;
-      val|= MY_L3;
-      hotkey_actioned = true;
-    }
+    // if((val & MY_R) && (val & MY_L1)) {
+    //   val&= ~MY_R;
+    //   val&= ~MY_L1;
+    //   val|= MY_L2;
+    //   hotkey_actioned = true;
+    // }
+    // if((val & MY_R) && (val & MY_R1)) {
+    //   val&= ~MY_R;
+    //   val&= ~MY_R1;
+    //   val|= MY_R2;
+    //   hotkey_actioned = true;
+    // }
+    // if((val & MY_R) && (val & MY_TB)) {
+    //   val&= ~MY_R;
+    //   val&= ~MY_TB;
+    //   val|= MY_R3;
+    //   hotkey_actioned = true;
+    // }
+    // if((val & MY_R) && (val & MY_B)) {
+    //   val&= ~MY_R;
+    //   val&= ~MY_B;
+    //   val|= MY_L3;
+    //   hotkey_actioned = true;
+    // }
   } else if(miyoo_ver == 4) {
     if((val & MY_R) && (val & MY_A)) {
       if(!hotkey_down && !hotkey_custom) {
@@ -892,8 +892,8 @@ static void scan_handler(unsigned long unused)
             break;
         case 4:
             //SUP M3 & XYC Q8 layout (swapped A-B )
-            report_key(pre, MY_A, KEY_LEFTALT);
-            report_key(pre, MY_B, KEY_SPACE);
+            report_key(pre, MY_A, KEY_SPACE);
+            report_key(pre, MY_B, KEY_LEFTALT);
             report_key(pre, MY_TA, KEY_LEFTCTRL);
             report_key(pre, MY_TB, KEY_LEFTSHIFT); 
             break;
@@ -978,7 +978,7 @@ static long myioctl(struct file *filp, unsigned int cmd, unsigned long arg)
     ret = copy_to_user((void*)arg, &miyoo_ver, sizeof(unsigned long));
     break;
   case MIYOO_LAY_SET_VER:
-    miyoo_layout = arg;
+    // miyoo_layout = arg;
 #if defined(DEBUG)  
     printk("miyoo keypad layout config as v%d\n", (int)miyoo_layout);
 #endif
