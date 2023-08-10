@@ -427,7 +427,7 @@ static void scan_handler(unsigned long unused)
           }
           if(gpio_get_value(IN_2) == 1){
               // val|= MY_L1;
-              val|= MY_B;
+              val|= MY_TA;
           }
           if(gpio_get_value(IN_1) == 1 && gpio_get_value(IN_2) == 0){
               val|= MY_START;
@@ -621,10 +621,10 @@ static void scan_handler(unsigned long unused)
     //   val|= MY_L3;
     //   hotkey_actioned = true;
     // }
-    if((val & MY_TB) && (val & MY_R1)) {
+    if((val & MY_R) && (val & MY_TB)) {
+      val&= ~MY_R;
       val&= ~MY_TB;
-      val&= ~MY_R1;
-      val|= MY_TA;
+      val|= MY_B;
       hotkey_actioned = true;
     }
   } else if(miyoo_ver == 4) {
