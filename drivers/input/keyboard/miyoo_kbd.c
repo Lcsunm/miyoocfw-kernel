@@ -113,6 +113,9 @@
 #define MY_L3     0x10000
 #define MY_R3     0x20000
 
+#define MY_X    (MY_TA)
+#define MY_Y    (MY_TB)
+
 #define IN_L1   ((32 * 2) + 1)
 #define IN_R1   ((32 * 2) + 2)
 #define IN_L2   ((32 * 4) + 0)
@@ -392,11 +395,11 @@ static void scan_handler(unsigned long unused)
           }
           if(gpio_get_value(IN_A_M3) == 1){
               // val|= MY_TB;
-              val|= MY_A;
+              val|= MY_B;
           }
           if(gpio_get_value(IN_PA1) == 1){
               // val|= MY_B;
-              val|= MY_TB;
+              val|= MY_X;
           }
 
           gpio_direction_input(IN_3);
@@ -427,7 +430,7 @@ static void scan_handler(unsigned long unused)
           }
           if(gpio_get_value(IN_2) == 1){
               // val|= MY_L1;
-              val|= MY_TA;
+              val|= MY_A;
           }
           if(gpio_get_value(IN_1) == 1 && gpio_get_value(IN_2) == 0){
               val|= MY_START;
@@ -621,10 +624,10 @@ static void scan_handler(unsigned long unused)
     //   val|= MY_L3;
     //   hotkey_actioned = true;
     // }
-    if((val & MY_R) && (val & MY_TB)) {
-      val&= ~MY_R;
-      val&= ~MY_TB;
-      val|= MY_B;
+    if((val & MY_X) && (val & MY_R1)) {
+      val&= ~MY_X;
+      val&= ~MY_R1;
+      val|= MY_Y;
       hotkey_actioned = true;
     }
   } else if(miyoo_ver == 4) {
@@ -904,10 +907,10 @@ static void scan_handler(unsigned long unused)
             break;
         case 4:
             //SUP M3 & XYC Q8 layout (swapped A-B )
-            report_key(pre, MY_A, KEY_LEFTCTRL);
-            report_key(pre, MY_B, KEY_SPACE);
-            report_key(pre, MY_TA, KEY_LEFTALT);
-            report_key(pre, MY_TB, KEY_LEFTSHIFT); 
+            report_key(pre, MY_B, KEY_LEFTCTRL);
+            report_key(pre, MY_Y, KEY_SPACE);
+            report_key(pre, MY_A, KEY_LEFTALT);
+            report_key(pre, MY_X, KEY_LEFTSHIFT); 
             break;
         case 5:
             //Custom I (swapped Y-X)
