@@ -424,15 +424,18 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_2) == 1){
               val|= MY_L1;
           }
+          if(gpio_get_value(IN_3) == 1){
+              val|= MY_R1;
+          }
           if(gpio_get_value(IN_1) == 1 && gpio_get_value(IN_2) == 0){
               val|= MY_START;
           }
 
 
-          gpio_direction_output(OUT_2, 0);
-          gpio_direction_output(OUT_3, 0);
-          gpio_direction_output(IN_4,1);
-          gpio_direction_output(IN_A_M3,1);
+          // gpio_direction_output(OUT_2, 0);
+          // gpio_direction_output(OUT_3, 0);
+          // gpio_direction_output(IN_4,1);
+          // gpio_direction_output(IN_A_M3,1);
           gpio_direction_input(IN_R2_M3);
           if(gpio_get_value(IN_R2_M3) == 1){
               val|= MY_R1;
