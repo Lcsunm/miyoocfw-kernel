@@ -162,8 +162,8 @@ bool hotkey_down=false;
 bool hotkey_custom=false;
 bool non_hotkey_first=false;
 bool non_hotkey_menu=false;
-module_param(miyoo_ver,uint,0660);
-module_param(miyoo_layout,uint,0660);
+// module_param(miyoo_ver,uint,0660);
+// module_param(miyoo_layout,uint,0660);
 
 static int do_input_request(uint32_t pin, const char*name)
 {
