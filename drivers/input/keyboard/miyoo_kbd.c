@@ -432,7 +432,7 @@ static void scan_handler(unsigned long unused)
           gpio_direction_output(OUT_2, 0);
           gpio_direction_output(OUT_3, 0);
           gpio_direction_output(IN_4,1);
-          // gpio_direction_output(IN_A_M3,1);
+          gpio_direction_output(IN_A_M3,1);
           gpio_direction_input(IN_R2_M3);
           if(gpio_get_value(IN_R2_M3) == 1){
               val|= MY_R1;
@@ -892,9 +892,9 @@ static void scan_handler(unsigned long unused)
             break;
         case 4:
             //SUP M3 & XYC Q8 layout (swapped A-B )
-            report_key(pre, MY_A, KEY_SPACE);
-            report_key(pre, MY_B, KEY_LEFTALT);
-            report_key(pre, MY_TA, KEY_LEFTCTRL);
+            report_key(pre, MY_A, KEY_LEFTCTRL);
+            report_key(pre, MY_B, KEY_SPACE);
+            report_key(pre, MY_TA, KEY_LEFTALT);
             report_key(pre, MY_TB, KEY_LEFTSHIFT); 
             break;
         case 5:
