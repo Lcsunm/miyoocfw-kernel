@@ -139,6 +139,13 @@
 #define IN_PC3  ((32 * 2) + 3)
 #define IN_PA1  ((32 * 0) + 1)
 
+#define RS77_X    (IN_PA1)
+#define RS77_A    (IN_A_M3)
+#define RS77_B    (IN_2)
+#define RS77_Y    (IN_A_M3)
+#define RS77_C    (IN_PA1)
+// #define RS77_D    (__)
+
 #define USE_UART	1
 
 #define NO_RAW	1
@@ -393,12 +400,10 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_2) == 1){
               val|= MY_LEFT;
           }
-          if(gpio_get_value(IN_A_M3) == 1){
-              // val|= MY_TB;
-              val|= MY_B;
+          if(gpio_get_value(RS77_A) == 1){
+              val|= MY_A;
           }
-          if(gpio_get_value(IN_PA1) == 1){
-              // val|= MY_B;
+          if(gpio_get_value(RS77_X) == 1){
               val|= MY_X;
           }
 
@@ -410,13 +415,11 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_2) == 1){
               val|= MY_RIGHT;
           }
-          if(gpio_get_value(IN_A_M3) == 1){
-              // val|= MY_A;
-              val|= MY_L1;
+          if(gpio_get_value(RS77_Y) == 1){
+              val|= MY_Y;
           }
-          if(gpio_get_value(IN_PA1) == 1){
-              // val|= MY_TA;
-              val|= MY_R1;
+          if(gpio_get_value(RS77_C) == 1){
+              val|= MY_L1;
           }
 
           gpio_direction_input(IN_4);
@@ -428,9 +431,8 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_A_M3) == 1){
               val|= MY_SELECT;
           }
-          if(gpio_get_value(IN_2) == 1){
-              // val|= MY_L1;
-              val|= MY_A;
+          if(gpio_get_value(RS77_B) == 1){
+              val|= MY_B;
           }
           if(gpio_get_value(IN_1) == 1 && gpio_get_value(IN_2) == 0){
               val|= MY_START;
@@ -624,10 +626,10 @@ static void scan_handler(unsigned long unused)
     //   val|= MY_L3;
     //   hotkey_actioned = true;
     // }
-    if((val & MY_X) && (val & MY_R1)) {
-      val&= ~MY_X;
-      val&= ~MY_R1;
-      val|= MY_Y;
+    if((val & MY_Y) && (val & MY_L1)) {
+      val&= ~MY_Y;
+      val&= ~MY_L1;
+      val|= MY_R1;
       hotkey_actioned = true;
     }
   } else if(miyoo_ver == 4) {
