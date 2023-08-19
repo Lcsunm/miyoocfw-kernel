@@ -386,6 +386,7 @@ static void scan_handler(unsigned long unused)
           gpio_direction_input(IN_4);
           gpio_direction_input(IN_A_M3);
           gpio_direction_input(IN_PA1);
+          gpio_direction_input(IN_R2_M3);
           gpio_direction_output(IN_3,1);
           if(gpio_get_value(IN_1) == 1){
               val|= MY_UP;
@@ -398,6 +399,9 @@ static void scan_handler(unsigned long unused)
           }
           if(gpio_get_value(IN_PA1) == 1){ // RS77_X
               val|= MY_X;
+          }
+          if(gpio_get_value(IN_R2_M3) == 0){ // RS77_D
+              val|= MY_R1;
           }
 
           gpio_direction_input(IN_3);
@@ -436,10 +440,10 @@ static void scan_handler(unsigned long unused)
           gpio_direction_output(OUT_3, 0);
           gpio_direction_output(IN_4,1);
           gpio_direction_output(IN_A_M3,1);
-          gpio_direction_input(IN_R2_M3);
-          if(gpio_get_value(IN_R2_M3) == 0){ // RS77_D
-              val|= MY_R1;
-          }
+          // gpio_direction_input(IN_R2_M3);
+          // if(gpio_get_value(IN_R2_M3) == 0){ // RS77_D
+          //     val|= MY_R1;
+          // }
 
           break;
       case 4:
