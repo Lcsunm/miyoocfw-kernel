@@ -144,7 +144,7 @@
 #define RS77_B    (IN_2)
 #define RS77_Y    (IN_A_M3)
 #define RS77_C    (IN_PA1)
-// #define RS77_D    (__)
+#define RS77_D    (IN_R2_M3)
 
 #define USE_UART	1
 
@@ -421,6 +421,10 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(RS77_C) == 1){
               val|= MY_L1;
           }
+          gpio_direction_input(RS77_D);
+          if(gpio_get_value(RS77_D) == 1){
+              val|= MY_R1;
+          }
 
           gpio_direction_input(IN_4);
           gpio_direction_output(OUT_2,1);
@@ -626,12 +630,12 @@ static void scan_handler(unsigned long unused)
     //   val|= MY_L3;
     //   hotkey_actioned = true;
     // }
-    if((val & MY_Y) && (val & MY_L1)) {
-      val&= ~MY_Y;
-      val&= ~MY_L1;
-      val|= MY_R1;
-      hotkey_actioned = true;
-    }
+    // if((val & MY_Y) && (val & MY_L1)) {
+    //   val&= ~MY_Y;
+    //   val&= ~MY_L1;
+    //   val|= MY_R1;
+    //   hotkey_actioned = true;
+    // }
   } else if(miyoo_ver == 4) {
     if((val & MY_R) && (val & MY_A)) {
       if(!hotkey_down && !hotkey_custom) {
