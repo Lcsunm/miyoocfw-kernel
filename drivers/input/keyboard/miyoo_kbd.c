@@ -386,7 +386,6 @@ static void scan_handler(unsigned long unused)
           gpio_direction_input(IN_4);
           gpio_direction_input(IN_A_M3);
           gpio_direction_input(IN_PA1);
-          gpio_direction_input(IN_R2_M3);
           gpio_direction_output(IN_3,1);
           if(gpio_get_value(IN_1) == 1){
               val|= MY_UP;
@@ -400,9 +399,6 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_PA1) == 1){ // RS77_X
               val|= MY_X;
           }
-          if(gpio_get_value(IN_R2_M3) == 0){ // RS77_D
-              val|= MY_R1;
-          }
 
           gpio_direction_input(IN_3);
           gpio_direction_output(IN_4,1);
@@ -413,10 +409,10 @@ static void scan_handler(unsigned long unused)
               val|= MY_RIGHT;
           }
           if(gpio_get_value(IN_A_M3) == 1){ // RS77_Y
-              val|= MY_Y;
+              val|= MY_L1;
           }
           if(gpio_get_value(IN_PA1) == 1){ // RS77_C
-              val|= MY_L1;
+              val|= MY_R1;
           }
 
           gpio_direction_input(IN_4);
@@ -623,12 +619,12 @@ static void scan_handler(unsigned long unused)
     //   val|= MY_L3;
     //   hotkey_actioned = true;
     // }
-    // if((val & MY_Y) && (val & MY_L1)) {
-    //   val&= ~MY_Y;
-    //   val&= ~MY_L1;
-    //   val|= MY_R1;
-    //   hotkey_actioned = true;
-    // }
+    if((val & MY_X) && (val & MY_R1)) {
+      val&= ~MY_X;
+      val&= ~MY_R1;
+      val|= MY_Y;
+      hotkey_actioned = true;
+    }
   } else if(miyoo_ver == 4) {
     if((val & MY_R) && (val & MY_A)) {
       if(!hotkey_down && !hotkey_custom) {
