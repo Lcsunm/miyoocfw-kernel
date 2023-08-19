@@ -139,13 +139,6 @@
 #define IN_PC3  ((32 * 2) + 3)
 #define IN_PA1  ((32 * 0) + 1)
 
-#define RS77_X    (IN_PA1)
-#define RS77_A    (IN_A_M3)
-#define RS77_B    (IN_2)
-#define RS77_Y    (IN_A_M3)
-#define RS77_C    (IN_PA1)
-#define RS77_D    (IN_R2_M3)
-
 #define USE_UART	1
 
 #define NO_RAW	1
@@ -393,6 +386,7 @@ static void scan_handler(unsigned long unused)
           gpio_direction_input(IN_4);
           gpio_direction_input(IN_A_M3);
           gpio_direction_input(IN_PA1);
+          gpio_direction_input(IN_R2_M3);
           gpio_direction_output(IN_3,1);
           if(gpio_get_value(IN_1) == 1){
               val|= MY_UP;
@@ -400,11 +394,14 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_2) == 1){
               val|= MY_LEFT;
           }
-          if(gpio_get_value(RS77_A) == 1){
+          if(gpio_get_value(IN_A_M3) == 1){ // RS77_A
               val|= MY_A;
           }
-          if(gpio_get_value(RS77_X) == 1){
+          if(gpio_get_value(IN_PA1) == 1){ // RS77_X
               val|= MY_X;
+          }
+          if(gpio_get_value(IN_R2_M3) == 1){ // RS77_D
+              val|= MY_R1;
           }
 
           gpio_direction_input(IN_3);
@@ -415,15 +412,11 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_2) == 1){
               val|= MY_RIGHT;
           }
-          if(gpio_get_value(RS77_Y) == 1){
+          if(gpio_get_value(IN_A_M3) == 1){ // RS77_Y
               val|= MY_Y;
           }
-          if(gpio_get_value(RS77_C) == 1){
+          if(gpio_get_value(IN_PA1) == 1){ // RS77_C
               val|= MY_L1;
-          }
-          gpio_direction_input(RS77_D);
-          if(gpio_get_value(RS77_D) == 1){
-              val|= MY_R1;
           }
 
           gpio_direction_input(IN_4);
@@ -435,7 +428,7 @@ static void scan_handler(unsigned long unused)
           if(gpio_get_value(IN_A_M3) == 1){
               val|= MY_SELECT;
           }
-          if(gpio_get_value(RS77_B) == 1){
+          if(gpio_get_value(IN_2) == 1){ // RS77_B
               val|= MY_B;
           }
           if(gpio_get_value(IN_1) == 1 && gpio_get_value(IN_2) == 0){
